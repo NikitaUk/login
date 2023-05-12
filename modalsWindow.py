@@ -2,7 +2,7 @@ from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QStackedLayout, QLineE
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QFont, QPixmap
 import functools
-from testWidgets import StartWidget, TestWidget, EndWidget
+from testWidgets import StartWidget, TestWidget1, TestWidget2, TestWidget3, EndWidget
 
 class ModalLogin(QWidget):
     def __init__(self):
@@ -18,26 +18,26 @@ class ModalLogin(QWidget):
 
     def add_layouts(self):
         self.startWidget = StartWidget(lambda: self.close(), lambda:  self.enter_clicked())
-        self.testWidget = TestWidget(lambda: self.next_clicked1(1), "Вопрос 1", ("Ответ 1", "Ответ 2", "Ответ 3"))
-        self.testWidget1 = TestWidget(lambda: self.next_clicked2(1), "Вопрос 2", ("Ответ 1", "Ответ 2", "Ответ 3"))
-        self.testWidget2 = TestWidget(lambda: self.next_clicked3(1), "Вопрос 3", ("Ответ 1", "Ответ 2", "Ответ 3"))
+        self.testWidget1 = TestWidget1(lambda: self.next_clicked1())
+        self.testWidget2 = TestWidget2(lambda: self.next_clicked2())
+        self.testWidget3 = TestWidget3(lambda: self.next_clicked3())
         self.endWidget = EndWidget()
         self.stackLayout.addWidget(self.startWidget)
-        self.stackLayout.addWidget(self.testWidget)
         self.stackLayout.addWidget(self.testWidget1)
         self.stackLayout.addWidget(self.testWidget2)
+        self.stackLayout.addWidget(self.testWidget3)
         self.stackLayout.addWidget(self.endWidget)
 
-    def next_clicked1(self, index):
-        if self.testWidget.rb_list[index].isChecked():
+    def next_clicked1(self):
+        if self.testWidget1.rb1.isChecked():
             self.stackLayout.setCurrentIndex(2)
 
-    def next_clicked2(self, index):
-        if self.testWidget1.rb_list[index].isChecked():
+    def next_clicked2(self):
+        if self.testWidget2.rb2.isChecked():
             self.stackLayout.setCurrentIndex(3)
-    
-    def next_clicked3(self, index):
-        if self.testWidget2.rb_list[index].isChecked():
+
+    def next_clicked3(self):
+        if self.testWidget3.rb3.isChecked():
             self.stackLayout.setCurrentIndex(4)
 
     def enter_clicked(self):

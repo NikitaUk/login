@@ -22,25 +22,72 @@ class StartWidget(QWidget):
         vbox.addLayout(self.hbox)
         self.setLayout(vbox)
 
-class TestWidget(QWidget):
-    rb_list = []
-    def __init__(self, btn_nextClicked, questionName, answers):
+class TestWidget1(QWidget):
+    def __init__(self, btn_nextClicked):
         super().__init__()
         #widgets
         font = QFont("Open sans", pointSize=15)
-        self.question = QLabel(f"<center>{questionName}</center>")
+        self.question = QLabel("<center>Вопрос 1</center>")
         self.btn_next = QPushButton("Далее")
         self.btn_next.setFont(font)
         self.question.setFont(font)
+        self.rb1 = QRadioButton("Ответ 1")
+        self.rb2 = QRadioButton("Ответ 2")
+        self.rb3 = QRadioButton("Ответ 3")
         #handler events
         self.btn_next.clicked.connect(btn_nextClicked)
         #layout
         vbox = QVBoxLayout()
         vbox.addWidget(self.question)
-        for i in answers:
-            rb = QRadioButton(i)
-            vbox.addWidget(rb)
-            self.rb_list.append(rb)
+        vbox.addWidget(self.rb1)
+        vbox.addWidget(self.rb2)
+        vbox.addWidget(self.rb3)
+        vbox.addWidget(self.btn_next)
+        self.setLayout(vbox)
+
+class TestWidget2(QWidget):
+    def __init__(self, btn_nextClicked):
+        super().__init__()
+        #widgets
+        font = QFont("Open sans", pointSize=15)
+        self.question = QLabel("<center>Вопрос 2</center>")
+        self.btn_next = QPushButton("Далее")
+        self.btn_next.setFont(font)
+        self.question.setFont(font)
+        self.rb1 = QRadioButton("Ответ 1")
+        self.rb2 = QRadioButton("Ответ 2")
+        self.rb3 = QRadioButton("Ответ 3")
+        #handler events
+        self.btn_next.clicked.connect(btn_nextClicked)
+        #layout
+        vbox = QVBoxLayout()
+        vbox.addWidget(self.question)
+        vbox.addWidget(self.rb1)
+        vbox.addWidget(self.rb2)
+        vbox.addWidget(self.rb3)
+        vbox.addWidget(self.btn_next)
+        self.setLayout(vbox)
+
+class TestWidget3(QWidget):
+    def __init__(self, btn_nextClicked):
+        super().__init__()
+        #widgets
+        font = QFont("Open sans", pointSize=15)
+        self.question = QLabel("<center>Вопрос 3</center>")
+        self.btn_next = QPushButton("Далее")
+        self.btn_next.setFont(font)
+        self.question.setFont(font)
+        self.rb1 = QRadioButton("Ответ 1")
+        self.rb2 = QRadioButton("Ответ 2")
+        self.rb3 = QRadioButton("Ответ 3")
+        #handler events
+        self.btn_next.clicked.connect(btn_nextClicked)
+        #layout
+        vbox = QVBoxLayout()
+        vbox.addWidget(self.question)
+        vbox.addWidget(self.rb1)
+        vbox.addWidget(self.rb2)
+        vbox.addWidget(self.rb3)
         vbox.addWidget(self.btn_next)
         self.setLayout(vbox)
 
