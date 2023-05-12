@@ -8,6 +8,7 @@ class LoginWindow(QWidget):
             if login == "a" and password == "b":
                 self.modal = ModalLogin()
                 self.modal.show()
+                self.close()
             else:
                 self.captchaModal = CaptchaLogin()
                 self.captchaModal.show()

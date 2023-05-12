@@ -1,23 +1,40 @@
-from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QLineEdit, QPushButton
+from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QStackedLayout, QLineEdit, QPushButton
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QFont, QPixmap
 import functools
+from testWidgets import StartWidget, TestWidget, EndWidget
 
 class ModalLogin(QWidget):
     def __init__(self):
         super().__init__()
         #window settings
-        self.setWindowTitle("Вы вошли")
+        self.setWindowTitle("Пройти тест")
         self.setFixedSize(400, 200)
         self.setWindowModality(Qt.WindowModality.ApplicationModal)
-        #widgets
-        font = QFont("Open sans", pointSize=15)
-        self.error = QLabel("<center>Верный пароль</center>")
-        self.error.setFont(font)
-        #layout
-        vbox = QVBoxLayout()
-        vbox.addWidget(self.error)
-        self.setLayout(vbox)
+        #add stacks
+        self.stackLayout = QStackedLayout()
+        self.add_layouts()
+        self.setLayout(self.stackLayout)
+
+    def add_layouts(self):
+        self.startWidget = StartWidget(lambda: self.close(), lambda:  self.enter_clicked())
+        self.testWidget = TestWidget(lambda: self.next_clicked(1, 1), "Вопрос 1", ("Ответ 1", "Ответ 2", "Ответ 3"))
+        self.testWidget1 = TestWidget(lambda: self.next_clicked(1, 2), "Вопрос 2", ("Ответ 1", "Ответ 2", "Ответ 3"))
+        self.testWidget2 = TestWidget(lambda: self.next_clicked(1, 3), "Вопрос 3", ("Ответ 1", "Ответ 2", "Ответ 3"))
+        self.endWidget = EndWidget()
+        self.stackLayout.addWidget(self.startWidget)
+        self.stackLayout.addWidget(self.testWidget)
+        self.stackLayout.addWidget(self.testWidget1)
+        self.stackLayout.addWidget(self.testWidget2)
+        self.stackLayout.addWidget(self.endWidget)
+
+    def next_clicked(self, index, numberQuestion):
+        if self.testWidget.rb_list[index].isChecked():
+            numberQuestion += 1
+            self.stackLayout.setCurrentIndex(numberQuestion)
+
+    def enter_clicked(self):
+        self.stackLayout.setCurrentIndex(1)
 
 class CaptchaLogin(QWidget):
     isExit = False
