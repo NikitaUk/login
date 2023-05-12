@@ -18,9 +18,9 @@ class ModalLogin(QWidget):
 
     def add_layouts(self):
         self.startWidget = StartWidget(lambda: self.close(), lambda:  self.enter_clicked())
-        self.testWidget = TestWidget(lambda: self.next_clicked(1, 1), "Вопрос 1", ("Ответ 1", "Ответ 2", "Ответ 3"))
-        self.testWidget1 = TestWidget(lambda: self.next_clicked(1, 2), "Вопрос 2", ("Ответ 1", "Ответ 2", "Ответ 3"))
-        self.testWidget2 = TestWidget(lambda: self.next_clicked(1, 3), "Вопрос 3", ("Ответ 1", "Ответ 2", "Ответ 3"))
+        self.testWidget = TestWidget(lambda: self.next_clicked1(1), "Вопрос 1", ("Ответ 1", "Ответ 2", "Ответ 3"))
+        self.testWidget1 = TestWidget(lambda: self.next_clicked2(1), "Вопрос 2", ("Ответ 1", "Ответ 2", "Ответ 3"))
+        self.testWidget2 = TestWidget(lambda: self.next_clicked3(1), "Вопрос 3", ("Ответ 1", "Ответ 2", "Ответ 3"))
         self.endWidget = EndWidget()
         self.stackLayout.addWidget(self.startWidget)
         self.stackLayout.addWidget(self.testWidget)
@@ -28,10 +28,17 @@ class ModalLogin(QWidget):
         self.stackLayout.addWidget(self.testWidget2)
         self.stackLayout.addWidget(self.endWidget)
 
-    def next_clicked(self, index, numberQuestion):
+    def next_clicked1(self, index):
         if self.testWidget.rb_list[index].isChecked():
-            numberQuestion += 1
-            self.stackLayout.setCurrentIndex(numberQuestion)
+            self.stackLayout.setCurrentIndex(2)
+
+    def next_clicked2(self, index):
+        if self.testWidget1.rb_list[index].isChecked():
+            self.stackLayout.setCurrentIndex(3)
+    
+    def next_clicked3(self, index):
+        if self.testWidget2.rb_list[index].isChecked():
+            self.stackLayout.setCurrentIndex(4)
 
     def enter_clicked(self):
         self.stackLayout.setCurrentIndex(1)

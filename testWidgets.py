@@ -1,6 +1,5 @@
-from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton, QRadioButton, QButtonGroup
-from PyQt6.QtCore import Qt, QTimer
-from PyQt6.QtGui import QFont, QPixmap
+from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QPushButton, QRadioButton
+from PyQt6.QtGui import QFont
 
 class StartWidget(QWidget):
     def __init__(self, btn_exitClicked, btn_enterClicked):
