@@ -1,11 +1,12 @@
 from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QVBoxLayout
 from PyQt6.QtGui import QFont
+from PyQt6.QtCore import Qt
 import sys
 from modalsWindow import ModalLogin, CaptchaLogin
 
 class LoginWindow(QWidget):
-    def enterClicked(self, login, password):
-            if login == "a" and password == "b":
+    def enterClicked(self):
+            if self.login_edit.text() == "a" and self.password_edit.text() == "b":
                 self.modal = ModalLogin()
                 self.modal.show()
                 self.close()
@@ -26,17 +27,15 @@ class LoginWindow(QWidget):
         self.password_edit = QLineEdit()
         self.enter_btn = QPushButton("Вход")
         #widgets settings
-        font = QFont("Open sans", pointSize=25)
-        font_btn = QFont("Open sans", pointSize=20)
-        self.login_lbl.setFont(font)
-        self.login_edit.setFont(font)
-        self.password_lbl.setFont(font)
-        self.password_edit.setFont(font)
-        self.enter_btn.setFont(font_btn)
+        self.login_lbl.setObjectName('LabelLogin')
+        self.password_lbl.setObjectName('LabelLogin')
+        self.login_edit.setObjectName('LabelLogin')
+        self.password_edit.setObjectName('LabelLogin')
+        self.enter_btn.setObjectName('PushButtonLogin')
         self.login_edit.setPlaceholderText("Логин")
         self.password_edit.setPlaceholderText("Пароль")
         #handler events
-        self.enter_btn.clicked.connect(lambda: self.enterClicked(self.login_edit.text(), self.password_edit.text()))
+        self.enter_btn.clicked.connect(self.enterClicked)
         #layout
         vbox = QVBoxLayout()
         vbox.addWidget(self.login_lbl)
@@ -45,6 +44,8 @@ class LoginWindow(QWidget):
         vbox.addWidget(self.password_edit)
         vbox.addWidget(self.enter_btn)
         self.setLayout(vbox)
+        with open('style.css') as style:
+             self.setStyleSheet(style.read())
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
