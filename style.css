@@ -1,0 +1,20 @@
+#LabelLogin {
+    font-size: 35px;
+    font-family: "Open Sans";
+}
+#LabelCaptcha {
+    font-size: 45px;
+    font-family: "Open Sans";
+}
+#PushButtonLogin {
+    font-size: 30px;
+    font-family: "Open Sans";
+}
+#LabelModalWindow, #LabelTestWindow, #LabelQuestionTestWindow, #LabelEndTestWindow {
+    font-size: 25px;
+    font-family: "Open Sans";
+}
+#LabelErrorModalWindow {
+    font-size: 20px;
+    font-family: "Open Sans";
+}
