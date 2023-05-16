@@ -1,41 +1,43 @@
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QPushButton, QRadioButton
-from PyQt6.QtGui import QFont
 
 class StartWidget(QWidget):
     def __init__(self, btn_exitClicked, btn_enterClicked):
         super().__init__()
         #widgets
-        font = QFont("Open sans", pointSize=15)
-        self.error = QLabel("<center>Готовы ли вы пройти тест?</center>")
+        self.question = QLabel("<center>Готовы ли вы пройти тест?</center>")
         self.btn_enter = QPushButton("Да")
         self.btn_exit = QPushButton("Выход")
         self.hbox = QHBoxLayout()
         self.hbox.addWidget(self.btn_enter)
         self.hbox.addWidget(self.btn_exit)
-        self.error.setFont(font)
+        #widgets settings
+        self.question.setObjectName('LabelTestWindow')
+
         #handler events
         self.btn_exit.clicked.connect(btn_exitClicked)
         self.btn_enter.clicked.connect(btn_enterClicked)
         #layout
         vbox = QVBoxLayout()
-        vbox.addWidget(self.error)
+        vbox.addWidget(self.question)
         vbox.addLayout(self.hbox)
         self.setLayout(vbox)
+        with open('style.css') as style:
+            self.setStyleSheet(style.read())
 
 class TestWidget1(QWidget):
     def __init__(self, btn_nextClicked):
         super().__init__()
         #widgets
-        font = QFont("Open sans", pointSize=15)
         self.question = QLabel("<center>Вопрос 1</center>")
         self.btn_next = QPushButton("Далее")
-        self.btn_next.setFont(font)
-        self.question.setFont(font)
         self.rb1 = QRadioButton("Ответ 1")
         self.rb2 = QRadioButton("Ответ 2")
         self.rb3 = QRadioButton("Ответ 3")
         #handler events
         self.btn_next.clicked.connect(btn_nextClicked)
+        #widget settings
+        self.btn_next.setObjectName("LabelQuestionTestWindow")
+        self.question.setObjectName("LabelQuestionTestWindow")
         #layout
         vbox = QVBoxLayout()
         vbox.addWidget(self.question)
@@ -44,19 +46,21 @@ class TestWidget1(QWidget):
         vbox.addWidget(self.rb3)
         vbox.addWidget(self.btn_next)
         self.setLayout(vbox)
+        with open('style.css') as style:
+            self.setStyleSheet(style.read())
 
 class TestWidget2(QWidget):
     def __init__(self, btn_nextClicked):
         super().__init__()
         #widgets
-        font = QFont("Open sans", pointSize=15)
         self.question = QLabel("<center>Вопрос 2</center>")
         self.btn_next = QPushButton("Далее")
-        self.btn_next.setFont(font)
-        self.question.setFont(font)
         self.rb1 = QRadioButton("Ответ 1")
         self.rb2 = QRadioButton("Ответ 2")
         self.rb3 = QRadioButton("Ответ 3")
+        #widget settings
+        self.btn_next.setObjectName("LabelQuestionTestWindow")
+        self.question.setObjectName("LabelQuestionTestWindow")
         #handler events
         self.btn_next.clicked.connect(btn_nextClicked)
         #layout
@@ -67,21 +71,23 @@ class TestWidget2(QWidget):
         vbox.addWidget(self.rb3)
         vbox.addWidget(self.btn_next)
         self.setLayout(vbox)
+        with open('style.css') as style:
+            self.setStyleSheet(style.read())
 
 class TestWidget3(QWidget):
     def __init__(self, btn_nextClicked):
         super().__init__()
         #widgets
-        font = QFont("Open sans", pointSize=15)
         self.question = QLabel("<center>Вопрос 3</center>")
         self.btn_next = QPushButton("Далее")
-        self.btn_next.setFont(font)
-        self.question.setFont(font)
         self.rb1 = QRadioButton("Ответ 1")
         self.rb2 = QRadioButton("Ответ 2")
         self.rb3 = QRadioButton("Ответ 3")
         #handler events
         self.btn_next.clicked.connect(btn_nextClicked)
+        #widget settings
+        self.btn_next.setObjectName("LabelQuestionTestWindow")
+        self.question.setObjectName("LabelQuestionTestWindow")
         #layout
         vbox = QVBoxLayout()
         vbox.addWidget(self.question)
@@ -90,15 +96,19 @@ class TestWidget3(QWidget):
         vbox.addWidget(self.rb3)
         vbox.addWidget(self.btn_next)
         self.setLayout(vbox)
+        with open('style.css') as style:
+            self.setStyleSheet(style.read())
 
 class EndWidget(QWidget):
     def __init__(self):
         super().__init__()
         #widgets
-        font = QFont("Open sans", pointSize=15)
         self.txt = QLabel("<center>Тест пройден</center>")
-        self.txt.setFont(font)
+        #widget settings
+        self.txt.setObjectName("LabelQuestionTestWindow")
         #layout
         vbox = QVBoxLayout()
         vbox.addWidget(self.txt)
         self.setLayout(vbox)
+        with open('style.css') as style:
+            self.setStyleSheet(style.read())
