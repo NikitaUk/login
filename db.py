@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import create_session
 
-engine = create_engine("postgresql+psycopg2://postgres:city@localhost/login")
+engine = create_engine("postgresql+psycopg2://postgres:pass@localhost/login")
 session = create_session(bind=engine)
 
 def login(name, psw):
