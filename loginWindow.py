@@ -12,8 +12,6 @@ class LoginWindow(QWidget):
             else:
                 self.captchaModal = CaptchaLogin()
                 self.captchaModal.show()
-
-    
     def __init__(self):
         super().__init__()
         #window settings
@@ -44,7 +42,7 @@ class LoginWindow(QWidget):
         vbox.addWidget(self.enter_btn)
         self.setLayout(vbox)
         with open('style.css') as style:
-             self.setStyleSheet(style.read())
+            self.setStyleSheet(style.read())
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
