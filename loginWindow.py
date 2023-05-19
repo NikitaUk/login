@@ -2,8 +2,17 @@ from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButto
 from PyQt6.QtCore import Qt
 import sys
 from modalsWindow import ModalLogin, CaptchaLogin
+from db import login
 
 class LoginWindow(QWidget):
+    #  def enterClicked(self):
+    #         if login(self.login_edit.text(), self.password_edit.text()):
+    #             self.modal = ModalLogin()
+    #             self.modal.show()
+    #             self.close()
+    #         else:
+    #             self.captchaModal = CaptchaLogin()
+    #             self.captchaModal.show()
     def enterClicked(self):
             if self.login_edit.text() == "a" and self.password_edit.text() == "b":
                 self.modal = ModalLogin()
