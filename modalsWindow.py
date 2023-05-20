@@ -6,9 +6,10 @@ from testWindow import StartWidget, TestWidget1, TestWidget2, TestWidget3, EndWi
 
 class ModalLogin(QWidget):
     results = [False, False, False]
-    def __init__(self):
+    def __init__(self, name):
         super().__init__()
         #window settings
+        self.name = name
         self.setWindowTitle("Пройти тест")
         self.setFixedSize(400, 300)
         self.setWindowModality(Qt.WindowModality.ApplicationModal)
@@ -18,7 +19,7 @@ class ModalLogin(QWidget):
         self.setLayout(self.stackLayout)
 
     def add_layouts(self):
-        self.startWidget = StartWidget(lambda: self.close(), lambda:  self.enter_clicked())
+        self.startWidget = StartWidget(lambda: self.close(), lambda:  self.enter_clicked(), self.name)
         self.testWidget1 = TestWidget1(lambda: self.next_clicked1(), lambda: self.back_clicked1())
         self.testWidget2 = TestWidget2(lambda: self.next_clicked2(), lambda: self.back_clicked2())
         self.testWidget3 = TestWidget3(lambda: self.next_clicked3(), lambda: self.back_clicked3())
