@@ -1,9 +1,10 @@
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QPushButton, QRadioButton
 
 class StartWidget(QWidget):
-    def __init__(self, btn_exitClicked, btn_enterClicked):
+    def __init__(self, btn_exitClicked, btn_enterClicked, name):
         super().__init__()
         #widgets
+        self.hello = QLabel(f"<center>Привет {name}</center>")
         self.question = QLabel("<center>Готовы ли вы пройти тест?</center>")
         self.btn_enter = QPushButton("Да")
         self.btn_exit = QPushButton("Выход")
@@ -12,12 +13,13 @@ class StartWidget(QWidget):
         self.hbox.addWidget(self.btn_exit)
         #widgets settings
         self.question.setObjectName('LabelTestWindow')
-
+        self.hello.setObjectName('LabelTestWindow')
         #handler events
         self.btn_exit.clicked.connect(btn_exitClicked)
         self.btn_enter.clicked.connect(btn_enterClicked)
         #layout
         vbox = QVBoxLayout()
+        vbox.addWidget(self.hello)
         vbox.addWidget(self.question)
         vbox.addLayout(self.hbox)
         self.setLayout(vbox)
@@ -133,17 +135,27 @@ class EndWidget(QWidget):
     def __init__(self, res, res_list):
         super().__init__()
         #widgets
-        self.txt = QLabel("<center>Тест пройден</center>")
+        self.res_list = res_list
+        self.res = res
+        self.txt1 = QLabel("<center>Тест пройден</center>")
         self.txt = QLabel(f"<center>{res}</center>")
+        self.btn = QPushButton("Записать результаты в файл")
         #widget settings
         self.txt.setObjectName("LabelQuestionTestWindow")
+        self.txt1.setObjectName("LabelQuestionTestWindow")
+        self.btn.setObjectName("LabelQuestionTestWindow")
         #layout
         vbox = QVBoxLayout()
         vbox.addWidget(self.txt)
+        vbox.addWidget(self.txt1)
+        vbox.addWidget(self.btn)
         self.setLayout(vbox)
+        self.btn.clicked.connect(self.write_res_clicked)
         with open('style.css') as style:
             self.setStyleSheet(style.read())
-        result_txt_list = ("верно" if res_list[0] else "неверно", "верно" if res_list[1] else "неверно", "верно" if res_list[2] else "неверно")
-        resultat = f"Результаты \n {res} \n Вопрос 1: {result_txt_list[0]} \n Вопрос 2: {result_txt_list[1]} \n Вопрос 3: {result_txt_list[2]}"
+
+    def write_res_clicked(self):
+        result_txt_list = ("верно" if self.res_list[0] else "неверно", "верно" if self.res_list[1] else "неверно", "верно" if self.res_list[2] else "неверно")
+        resultat = f"Результаты \n {self.res} \n Вопрос 1: {result_txt_list[0]} \n Вопрос 2: {result_txt_list[1]} \n Вопрос 3: {result_txt_list[2]}"
         with open('results.txt', "w", encoding="utf-8") as f:
             f.write(resultat)
