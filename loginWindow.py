@@ -15,7 +15,7 @@ class LoginWindow(QWidget):
     #             self.captchaModal.show()
     def enterClicked(self):
             if self.login_edit.text() == "a" and self.password_edit.text() == "b":
-                self.modal = ModalLogin()
+                self.modal = ModalLogin(self.login_edit.text)
                 self.modal.show()
                 self.close()
             else:
