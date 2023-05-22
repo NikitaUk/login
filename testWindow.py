@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QPushButton, QRadioButton
+from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QPushButton, QRadioButton, QCheckBox, QGroupBox
 
 class StartWidget(QWidget):
     def __init__(self, btn_exitClicked, btn_enterClicked, name):
@@ -65,19 +65,19 @@ class TestWidget2(QWidget):
     def __init__(self, btn_nextClicked, btn_backClicked):
         super().__init__()
         #widgets
-        self.question = QLabel("<center>Кто правил в СССР первым</center>")
+        self.question = QLabel("<center>Кто правил в СССР?</center>")
         self.btn_next = QPushButton("Далее")
         self.btn_back = QPushButton("Назад")
-        self.rb1 = QRadioButton("Ельцин")
-        self.rb2 = QRadioButton("Ленин")
-        self.rb3 = QRadioButton("Сталин")
+        self.cb1 = QCheckBox("Ельцин")
+        self.cb2 = QCheckBox("Хрущев")
+        self.cb3 = QCheckBox("Сталин")
         #widget settings
         self.btn_next.setObjectName("LabelQuestionTestWindow")
         self.btn_back.setObjectName("LabelQuestionTestWindow")
         self.question.setObjectName("LabelQuestionTestWindow")
-        self.rb1.setObjectName('LabelTestWindow')
-        self.rb2.setObjectName('LabelTestWindow')
-        self.rb3.setObjectName('LabelTestWindow')
+        self.cb1.setObjectName('LabelTestWindow')
+        self.cb2.setObjectName('LabelTestWindow')
+        self.cb3.setObjectName('LabelTestWindow')
         #handler events
         self.btn_next.clicked.connect(btn_nextClicked)
         self.btn_back.clicked.connect(btn_backClicked)
@@ -85,9 +85,9 @@ class TestWidget2(QWidget):
         vbox = QVBoxLayout()
         hbox = QHBoxLayout()
         vbox.addWidget(self.question)
-        vbox.addWidget(self.rb1)
-        vbox.addWidget(self.rb2)
-        vbox.addWidget(self.rb3)
+        vbox.addWidget(self.cb1)
+        vbox.addWidget(self.cb2)
+        vbox.addWidget(self.cb3)
         vbox.addWidget(self.btn_next)
         hbox.addWidget(self.btn_back)
         hbox.addWidget(self.btn_next)
@@ -137,17 +137,31 @@ class EndWidget(QWidget):
         #widgets
         self.res_list = res_list
         self.res = res
-        self.txt1 = QLabel("<center>Тест пройден</center>")
-        self.txt = QLabel(f"<center>{res}</center>")
+        self.txt = QLabel("<center>Тест пройден</center>")
+        self.txt1 = QLabel(f"<center>Вы набрали {res} из 6 баллов</center>")
         self.btn = QPushButton("Записать результаты в файл")
+        self.gb = QGroupBox("Смотреть результаты")
+        self.gb_lbl1 = QLabel(f"Вопрос 1: {int(res_list[0]/50)} б.")
+        self.gb_lbl2 = QLabel(f"Вопрос 2: {int(res_list[1]/50)} б.")
+        self.gb_lbl3 = QLabel(f"Вопрос 3: {int(res_list[2]/50)} б.")
         #widget settings
         self.txt.setObjectName("LabelQuestionTestWindow")
         self.txt1.setObjectName("LabelQuestionTestWindow")
         self.btn.setObjectName("LabelQuestionTestWindow")
+        self.gb.setObjectName('GroupTestWindow')
+        self.gb_lbl1.setObjectName('GroupTestLbl')
+        self.gb_lbl2.setObjectName('GroupTestLbl')
+        self.gb_lbl3.setObjectName('GroupTestLbl')
         #layout
         vbox = QVBoxLayout()
+        vbox_group = QVBoxLayout()
+        vbox_group.addWidget(self.gb_lbl1)
+        vbox_group.addWidget(self.gb_lbl2)
+        vbox_group.addWidget(self.gb_lbl3)
+        self.gb.setLayout(vbox_group)
         vbox.addWidget(self.txt)
         vbox.addWidget(self.txt1)
+        vbox.addWidget(self.gb)
         vbox.addWidget(self.btn)
         self.setLayout(vbox)
         self.btn.clicked.connect(self.write_res_clicked)
@@ -155,7 +169,6 @@ class EndWidget(QWidget):
             self.setStyleSheet(style.read())
 
     def write_res_clicked(self):
-        result_txt_list = ("верно" if self.res_list[0] else "неверно", "верно" if self.res_list[1] else "неверно", "верно" if self.res_list[2] else "неверно")
-        resultat = f"Результаты \n {self.res} \n Вопрос 1: {result_txt_list[0]} \n Вопрос 2: {result_txt_list[1]} \n Вопрос 3: {result_txt_list[2]}"
+        resultat = f"Результаты \n Вы набрали {self.res} из 6 баллов \n Вопрос 1: {int(self.res_list[0]/50)} \n Вопрос 2: {int(self.res_list[1]/50)} \n Вопрос 3: {int(self.res_list[2]/50)}"
         with open('results.txt', "w", encoding="utf-8") as f:
             f.write(resultat)
