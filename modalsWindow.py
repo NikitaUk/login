@@ -5,7 +5,7 @@ import string
 from testWindow import StartWidget, TestWidget1, TestWidget2, TestWidget3, EndWidget
 
 class ModalLogin(QWidget):
-    results = [False, False, False]
+    results = [0, 0, 0]
     def __init__(self, name):
         super().__init__()
         #window settings
@@ -30,31 +30,30 @@ class ModalLogin(QWidget):
 
     def next_clicked1(self):
         if self.testWidget1.rb1.isChecked():
-            self.results[0] = True
+            self.results[0] += 100
         self.stackLayout.setCurrentIndex(2)
 
     def next_clicked2(self):
-        if self.testWidget2.rb2.isChecked():
-            self.results[1] = True
+        if self.testWidget2.cb1.isChecked():
+            self.results[1] -= 50
+        if self.testWidget2.cb2.isChecked():
+            self.results[1] += 50
+        if self.testWidget2.cb3.isChecked():
+            self.results[1] += 50
+        if self.results[1] < 0:
+            self.results[1] = 0
         self.stackLayout.setCurrentIndex(3)
 
     def next_clicked3(self):
         if self.testWidget3.rb3.isChecked():
-            self.results[2] = True
+            self.results[2] += 100
         j = 0
-        text = None
         for i in self.results:
-            if i:
-                j += 1
-        if j == 3:
-            text = "Все ответы правильны"
-        elif j == 0:
-            text = "Ничего не верно"
-        elif j == 1:
-            text = "Верно 1 из 3"
-        else:
-            text = "Верно 2 из 3"
-        self.endWidget = EndWidget(text, self.results)
+            if i == 100:
+                j+=2
+            elif i == 50:
+                j+=1
+        self.endWidget = EndWidget(str(j), self.results)
         self.stackLayout.addWidget(self.endWidget)
         self.stackLayout.setCurrentIndex(4)
 
